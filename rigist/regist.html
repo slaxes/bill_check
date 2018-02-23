@@ -9,31 +9,49 @@
 	function mobilecheck()
 	{
 		var tel =document.getElementById("mobile").value;
-		if(isNaN(tel))
-		{
-			document.getElementById("tele").innerHTML="<font color='red'>请输入正确的手机号码！</font>";
-            document.getElementById("submit").disabled = false;
+		if(!tel){
+			document.getElementById("tick1").style.display = "none";
+            document.getElementById("cross1").style.display = "none"
+		}
+		else {
+		    var number = parseInt(tel);
+            if (isNaN(tel)||(number < 10000000000)) {
+                document.getElementById("tick1").style.display = "none";
+                document.getElementById("cross1").style.display = "block";
+				document.getElementById("submit").disabled = false;
+            }
+            else {
+                document.getElementById("tick1").style.display = "block";
+                document.getElementById("cross1").style.display = "none";
+                document.getElementById("submit").disabled = true;
+            }
         }
-        else 
-		{
-            document.getElementById("tele").innerHTML="<font color='green'>ok</font>";
-            document.getElementById("submit").disabled = true;
-        }
-	};
-    function validate() 
+	}
+    function validate()
 	{
         var pwd1 = document.getElementById("pwd1").value;
         var pwd2 = document.getElementById("pwd2").value;
-        if(pwd1 == pwd2) 
+        if ((!pwd1)||(!pwd2))
 		{
-            document.getElementById("notice").innerHTML="<font color='green'>ok</font>";
-            document.getElementById("submit").disabled = false;
-        }
-        else 
+			document.getElementById("tick2").style.display = "none";
+			document.getElementById("cross2").style.display = "none"
+
+		}
+		else
 		{
-            document.getElementById("notice").innerHTML="<font color='red'>两次密码不相同</font>";
-            document.getElementById("submit").disabled = true;
-        }
+            if(pwd1 == pwd2)
+            {
+                document.getElementById("tick2").style.display = "block";
+                document.getElementById("cross2").style.display = "none";
+                document.getElementById("submit").disabled = false;
+            }
+            else
+            {
+                document.getElementById("tick2").style.display = "none";
+                document.getElementById("cross2").style.display = "block";
+                document.getElementById("submit").disabled = true;
+            }
+		}
     }
 </script>
 <body>
@@ -54,6 +72,7 @@
 			<option>分管副总经理</option> 
 			</select>		
 		</td>
+		<td></td>
 	</tr>
 	<tr class="evenrow">
 		<td class="tdleft">
@@ -62,13 +81,18 @@
 		<td>
 			<input type="text" class="inputbox" size="18" />
 		</td>
+		<td></td>
 	</tr>
 	<tr class="oddrow">
    		<td class="tdleft">
 			手机号码：
 		</td>
 		<td>
-			<input type="text" id="mobile" class="inputbox" size="18" onKeyUp="mobilecheck()" maxlength="11" required="true"/><span id="tele"></span>
+			<input type="text" id="mobile" class="inputbox" size="18" onKeyUp="mobilecheck()" maxlength="11" required="true"/>
+		</td>
+		<td width="80%">
+			<img src="../images/main/tick.png" id="tick1" style="display: none" alt=""/>
+			<img src="../images/main/cross.png" id="cross1" style="display: none" alt=""/>
 		</td>
 	</tr>
 	<tr class="evenrow">
@@ -78,6 +102,7 @@
 		<td>
 			<input type="text" class="inputbox" size="18" maxlength="18" required="true"/>
 		</td>
+		<td></td>
 	</tr>
 	<tr class="oddrow">
    		<td class="tdleft">
@@ -86,21 +111,28 @@
 		<td>
 			<input type="text" class="inputbox" size="18" required="true"/>
 		</td>
+		<td></td>
 	</tr>
 	<tr class="evenrow">
 		<td class="tdleft">
    			密&nbsp;&nbsp;&nbsp;&nbsp;码：
 		</td>
 		<td>
-			<input type="password" id="pwd1" class="inputbox" size="18" required="true"/>
+			<input type="password" id="pwd1" class="inputbox" size="18" onkeyup="validate()" required="true"/>
 		</td>
+		<td></td>
 	</tr>
 	<tr class="oddrow">
 		<td class="tdleft">
    			再次输入：
 		</td>
 		<td>
-			<input type="password" id="pwd2" class="inputbox" size="18" onKeyUp="validate()" required="true"/><span id="notice"></span>&nbsp;<img src="../images/main/tick.png" />
+			<input type="password" id="pwd2" class="inputbox" size="18" onKeyUp="validate()" required="true"/>
+		</td>
+		<td width="80%">
+			<img src="../images/main/tick.png" id="tick2" style="display: none" alt=""/>
+			<img src="../images/main/cross.png" id="cross2" style="display: none" alt=""/>
+		</td>
 	</tr>
 </table>
 		<input type="submit" value="提交" onclick="validate()" />&nbsp;

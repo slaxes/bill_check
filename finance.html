@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>财务人员界面</title>
+    <style type="text/css">
+        .divaside{
+            border-right: 1px solid black;
+            height: 650px;
+        }
+        .choice{
+            background-color: white;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-radius: 10px;
+            width: 150px;
+            height: 30px;
+        }
+        .show{
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+        .center{
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            width: 80%;
+            position: relative;
+            left: 300px;
+            bottom: 620px;
+        }
+        .remind{
+            font-size: 10px;
+        }
+    </style>
+</head>
+<script>
+    function choose_upload() {
+        var up = document.getElementById("upload1");
+        up.style.display="block";
+        var ch = document.getElementById("change1");
+        ch.style.display="none"
+    }
+    function choose_change() {
+        var up = document.getElementById("upload1");
+        up.style.display="none";
+        var ch = document.getElementById("change1");
+        ch.style.display="block"
+    }
+    function reset1() {
+        document.getElementById("submit").disabled = false;
+    }
+    function check_post() {                                                                 /*检验是否能post*/
+        var check1 = document.getElementById("checkbox1");
+        var check2 = document.getElementById("checkbox2");
+        if (check1.checked == false){
+            if (check2.checked == false) {
+                document.getElementById("submit").disabled = true;
+                alert("请补充您的信息！")
+                return
+            }
+        }
+        if (check1.checked == true) {
+            var new0 = document.getElementById("input1").value;
+            if (!new0){
+                document.getElementById("submit").disabled = true;
+                alert("请补充您的信息！");
+                return
+            }
+            else
+                document.getElementById("submit").disabled = false
+        }
+        if (check2.checked == true) {
+            var new1 = document.getElementById("input3").value;
+            var new2 = document.getElementById("input4").value;
+            if((!new1)||(!new2)) {
+                document.getElementById("submit").disabled = true;
+                alert("请补充您的信息！");
+                return
+            }
+            else {
+                if (new1 != new2) {
+                    document.getElementById("submit").disabled = true;
+                    alert("请检查输入是否有误！");
+                    return
+                }
+                else
+                    document.getElementById("submit").disabled = false;
+            }
+        }
+    }
+    function ifnew1isnew2() {
+        var new1 = document.getElementById("input3").value;
+        var new2 = document.getElementById("input4").value;
+        if ((!new1)||(!new2)) {
+            document.getElementById("tick3").style.display = "none";
+            document.getElementById("cross3").style.display = "none"
+        }
+        else {
+            if (new1 == new2) {
+                document.getElementById("tick3").style.display = "block";
+                document.getElementById("cross3").style.display = "none"
+            }
+            else if (new1 != new2) {
+                document.getElementById("tick3").style.display = "none";
+                document.getElementById("cross3").style.display = "block"
+            }
+        }
+    }
+    window.onload = function () {
+        var width1 = parseInt(window.screen.availWidth);
+        document.getElementById("upload1").style.width = (width1-350) + 'px';
+        document.getElementById("change1").style.width = (width1-350) + 'px';
+    }
+</script>
+<script src="jquery/jquery-3.3.1.min.js"></script>
+<body>
+    <div>
+        <img src="images/logo.png" alt="logo" style="position: relative;left: 20px;top: 20px;">
+    </div>
+    <div>
+        <div id="aside" style="position: relative;left: 20px;top: 20px; width: 220px" class="divaside">
+            <input type="button" value="上传表格" class="choice" onclick="choose_upload()" style="position:relative;left: 20px;top: 5px">
+            <br>
+            <input type="button" value="修改信息" class="choice" onclick="choose_change()" style="position:relative;left: 20px;top: 10px;">
+        </div>
+    </div>
+    <div>
+        <div id="upload1" style="display: block;width: 500px;height: 400px;" class="center">
+            <div style="position: relative;left: 50px;top: 100px">
+                <form enctype="multipart/form-data" action="/uploadFile/" method="post">                         <!-- 表单上传 -->
+                    请选择上传表格类型：&#12288;&#12288;&#12288;&#12288;
+                    <select size="1" style="height: 30px;width: 150px">
+                        <option>银行收入流水表</option>
+                        <option>账单表</option>
+                    </select>
+                    <br/><br/>
+                    请选择上传表格：&#12288;&#12288;&#12288;&#12288;&#12288;&#12288;
+                    <input type="file" name="myfile" />
+                    <br/><br/>
+                    <input type="submit" id="push" value="上传" style="position: relative;top: 20px"/>           <!-- 上传按钮 -->
+                </form>
+            </div>
+        </div>
+        <div id="change1" style="display: none;width: 500px;height: 400px;" class="center">
+            <div style="position: relative;left: 50px;top: 100px">
+                <form enctype="multipart/form-data" action="/uploadFile/" method="post">                        <!-- 上传个人信息 -->
+                <table border="0">
+                    <tr>
+                        <td><input type="checkbox" id="checkbox1"/></td>
+                        <td>手机号码</td>
+                        <td>&#12288;&#12288;&#12288;&#12288;</td>
+                        <td><input onfocus="reset1()" type="text" id="input1" style="width: 150px;height: 20px"/></td>
+                        <td>
+                            <img src="images/main/tick.png" style="display: none;" id="tick1" alt=""/>
+                            <img src="images/main/cross.png" style="display: none;" id="cross1" alt=""/>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td><input type="checkbox" id="checkbox2"/></td>
+                        <td>密码</td>
+                        <td><p class="remind" style="size: 10px">&#12288;&#12288;旧密码</p></td>
+                        <td><input onfocus="reset1()" type="password" id="input2" style="width: 150px;height: 20px;"/></td>
+                        <td>
+                            <img src="images/main/tick.png" style="display: none;" id="tick2" alt=""/>
+                            <img src="images/main/cross.png" style="display: none;" id="cross2" alt=""/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><p class="remind">&#12288;&#12288;新密码</p></td>
+                        <td><input onfocus="reset1()" type="password" id="input3" onkeyup="ifnew1isnew2()" style="width: 150px;height: 20px;"/></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td><p class="remind">&#12288;再次输入</p></td>
+                        <td><input onfocus="reset1()" type="password" id="input4" onkeyup="ifnew1isnew2()" style="width: 150px;height: 20px;"/></td>
+                        <td>
+                            <img src="images/main/tick.png" style="display: none" id="tick3" alt=""/>
+                            <img src="images/main/cross.png" style="display: none;" id="cross3" alt=""/>
+                        </td>
+                    </tr>
+                </table>
+                    <input type="button" value="确认" onclick="check_post()" id="submit"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

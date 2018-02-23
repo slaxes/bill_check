@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>总经理界面</title>
+    <style type="text/css">
+        .divaside{
+            border-right: 1px solid black;
+            height: 650px;
+        }
+        .choice{
+            background-color: white;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-radius: 10px;
+            width: 150px;
+            height: 30px;
+        }
+        .center{
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            width: 80%;
+            position: relative;
+            left: 300px;
+            bottom: 620px;
+        }
+    </style>
+</head>
+<script>
+    function choose_check() {
+        document.getElementById("check1").style.display="block";
+        document.getElementById("ask1").style.display="none";
+        document.getElementById("check2").style.display="none";
+        document.getElementById("change1").style.display="none";
+        document.getElementById("remind").style.display="none";
+    }
+    function choose_mem() {
+        document.getElementById("check1").style.display="none";
+        document.getElementById("ask1").style.display="block";
+        document.getElementById("check2").style.display="none";
+        document.getElementById("change1").style.display="none";
+        document.getElementById("remind").style.display="none";
+    }
+    function choose_ask() {
+        document.getElementById("check1").style.display="none";
+        document.getElementById("ask1").style.display="none";
+        document.getElementById("check2").style.display="block";
+        document.getElementById("change1").style.display="none";
+        document.getElementById("remind").style.display="none";
+    }
+    function choose_change() {
+        document.getElementById("check1").style.display="none";
+        document.getElementById("ask1").style.display="none";
+        document.getElementById("check2").style.display="none";
+        document.getElementById("change1").style.display="block";
+        document.getElementById("remind").style.display="none";
+    }
+    function choose_notice() {
+        document.getElementById("check1").style.display="none";
+        document.getElementById("ask1").style.display="none";
+        document.getElementById("check2").style.display="none";
+        document.getElementById("change1").style.display="none";
+        document.getElementById("remind").style.display="block";
+    }
+    window.onload = function () {
+        var width1 = parseInt(window.screen.availWidth);
+        document.getElementById("check1").style.width = (width1-350) + 'px';
+        document.getElementById("ask1").style.width = (width1-350) + 'px';
+        document.getElementById("check2").style.width = (width1-350) + 'px';
+        document.getElementById("change1").style.width = (width1-350) + 'px';
+        document.getElementById("remind").style.width = (width1-350) + 'px';
+    }
+</script>
+<body>
+    <div>
+        <img src="images/logo.png" alt="logo" style="position: relative;left: 20px;top: 20px;">
+    </div>
+    <div>
+        <div id="aside" style="position: relative;left: 20px;top: 20px; width: 220px" class="divaside">
+            <input type="button" value="数据审核" class="choice" onclick="choose_check()" style="position:relative;left: 20px;top: 5px">
+            <br>
+            <input type="button" value="数据查询" class="choice" onclick="choose_ask()" style="position:relative;left: 20px;top: 15px;">
+            <br>
+            <input type="button" value="成员审核" class="choice" onclick="choose_mem()" style="position:relative;left: 20px;top: 25px;">
+            <br>
+            <input type="button" value="成员修改" class="choice" onclick="choose_change()" style="position:relative;left: 20px;top: 35px;">
+            <br>
+            <input type="button" value="回款提醒" class="choice" onclick="choose_notice()" style="position:relative;left: 20px;top: 45px;">
+            <br>
+        </div>
+    </div>
+    <div id="check1" style="display: block;" class="center">
+        数据审核
+    </div>
+    <div id="ask1" style="display: none;" class="center">
+        数据查询
+    </div>
+    <div id="check2" style="display: none;" class="center">
+        成员审核
+    </div>
+    <div id="change1" style="display: none;" class="center">
+        成员修改
+    </div>
+    <div id="remind" style="display: none;" class="center">
+        回款提醒
+    </div>
+    </div>
+</body>
+</html>

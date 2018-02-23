@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>经理界面</title>
+    <style type="text/css">
+        .divaside{
+            border-right: 1px solid black;
+            height: 650px;
+        }
+        .choice{
+            background-color: white;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-radius: 10px;
+            width: 150px;
+            height: 30px;
+        }
+        .center{
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+            width: 80%;
+            position: relative;
+            left: 300px;
+            bottom: 620px;
+        }
+    </style>
+</head>
+<script>
+    function choose_check() {
+        var ch1 = document.getElementById("check")
+        ch1.style.display="block"
+        var ch = document.getElementById("change")
+        ch.style.display="none"
+        var ask = document.getElementById("ask")
+        ask.style.display="none"
+    }
+    function choose_change() {
+        var ch1 = document.getElementById("check")
+        ch1.style.display="none"
+        var ch = document.getElementById("change")
+        ch.style.display="block"
+        var ask = document.getElementById("ask")
+        ask.style.display="none"
+    }
+    function choose_ask() {
+        var ch1 = document.getElementById("check")
+        ch1.style.display="none"
+        var ch = document.getElementById("change")
+        ch.style.display="none"
+        var ask = document.getElementById("ask")
+        ask.style.display="block"
+    }
+    window.onload = function () {
+        var width1 = parseInt(window.screen.availWidth);
+        document.getElementById("check").style.width = (width1-350) + 'px';
+        document.getElementById("change").style.width = (width1-350) + 'px';
+        document.getElementById("ask").style.width = (width1-350) + 'px';
+    }
+</script>
+<body>
+    <div>
+        <img src="images/logo.png" alt="logo" style="position: relative;left: 20px;top: 20px;">
+    </div>
+    <div>
+        <div id="aside" style="position: relative;left: 20px;top: 20px; width: 220px" class="divaside">
+            <input type="button" value="数据审核" class="choice" onclick="choose_check()" style="position:relative;left: 20px;top: 5px">
+            <br>
+            <input type="button" value="修改信息" class="choice" onclick="choose_change()" style="position:relative;left: 20px;top: 10px;">
+            <br>
+            <input type="button" value="数据查询" class="choice" onclick="choose_ask()" style="position:relative;left: 20px;top: 15px;">
+        </div>
+    </div>
+    <div>
+        <div id="check" style="display: block;" class="center">
+            数据审核
+        </div>
+        <div id="change" style="display: none;" class="center">
+            修改信息
+        </div>
+        <div id="ask" style="display: none;" class="center">
+            数据查询
+        </div>
+    </div>
+</body>
+</html>
